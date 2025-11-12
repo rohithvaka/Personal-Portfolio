@@ -1,3 +1,114 @@
+// let api1 = fetch("http://127.0.0.1:54367/projects/");
+// console.log(api1)
+// api1.then((res)=>{
+//   return res.json()
+// }).then((res)=>{
+//   console.log(res)
+// })
+
+
+
+// let api2 = fetch("http://127.0.0.1:54367/contact/");
+// console.log(api2)
+// api2.then((res)=>{
+//   return res.json()
+// }).then((res)=>{
+//   console.log(res)
+// })
+
+// let displaydata = (res) => {
+//     let table = document.getElementById('block');
+//     // table.innerHTML = ''; 
+
+//     res.forEach(element => {
+//         table.innerHTML += `
+//             <tr>
+//                 <td>${element.name}</td>
+//                 <td>${element.email}</td>
+//                 <td>${element.message}</td>
+//             </tr>
+//         `;
+//     });
+// };
+
+
+
+
+//async and await function to fetch data from api
+// let example1 = async () => {
+//   let api1 = await fetch("http://127.0.0.1:54367/projects/");
+//   let data = await api1.json();
+//   console.log(data);
+// }
+// example1()
+
+// async function example2() {
+//   let api2 = await fetch("http://127.0.0.1:54367/contact/");
+//   let data = await api2.json();
+//   let contact = data.contact
+//   let table1 = document.querySelector('#tabale1')
+//   contact.forEach((ele) => {
+//   table1.innerHTML += `   
+//   <tr>
+//     <td>${ele.id}</td>
+//     <td>${ele.name}</td>
+//     <td>${ele.email}</td>
+//     <td>${ele.message}</td>
+//   </tr>
+//   `
+    
+//   });
+// }
+// example2()
+
+
+
+document.addEventListener("DOMContentLoaded", function() {
+  const form = document.getElementById("contactForm");
+
+  if (!form) {
+    console.error("❌ contactForm not found in HTML.");
+    return;
+  }
+
+  form.addEventListener("submit", async function(e) {
+    e.preventDefault(); // stop page reload
+
+    const name = document.getElementById("fullname").value;
+    const email = document.getElementById("email").value;
+    const message = document.getElementById("message").value;
+
+    try {
+      const response = await fetch("http://127.0.0.1:54367/contact/", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ name, email, message }),
+      });
+
+      if (response.ok) {
+        alert("✅ Message sent successfully!");
+        form.reset();
+      } else {
+        alert("❌ Failed to send message.");
+      }
+    } catch (error) {
+      console.error("Error:", error);
+      alert("⚠️ Something went wrong. Check console.");
+    }
+  });
+});
+
+
+
+
+
+
+
+
+
+
+
+
 'use strict';
 
 
